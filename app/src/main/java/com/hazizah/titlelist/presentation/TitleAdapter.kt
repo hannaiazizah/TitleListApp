@@ -8,7 +8,7 @@ import com.hazizah.titlelist.R
 import kotlinx.android.synthetic.main.view_holder_title.view.*
 
 class TitleAdapter: RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
-    private lateinit var titles: List<String>
+    private var titles: List<String> = listOf()
 
     fun setTitles(titleList: List<String>) {
         titles = titleList
