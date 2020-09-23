@@ -23,4 +23,19 @@ class DataRepositoryImpl(
             }
         }
     }
+
+    override suspend fun cacheData(data: List<Article>) {
+        with(appDatabase.articleDao()) {
+            deleteAll()
+            insertAll(data)
+        }
+    }
+
+    override suspend fun fetchLocalData(): List<Article> {
+        return appDatabase.articleDao().getAll()
+    }
+
+    override suspend fun findData(search: String): List<Article> {
+        return appDatabase.articleDao().findTitle(search)
+    }
 }

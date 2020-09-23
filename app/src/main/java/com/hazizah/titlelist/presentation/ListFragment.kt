@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -43,6 +44,26 @@ class ListFragment : Fragment() {
         }
 
         binding.refreshLayout.setOnRefreshListener { viewModel.getData() }
+
+        binding.searchLayout.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            var hasSubmit = false
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    viewModel.search(query)
+                    hasSubmit = true
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText?.isEmpty() == true && hasSubmit) {
+                    viewModel.getData()
+                    hasSubmit = false
+                }
+                return false
+            }
+
+        })
 
         viewModel.getData()
         viewModel.articleList.observe(viewLifecycleOwner, Observer { resources ->

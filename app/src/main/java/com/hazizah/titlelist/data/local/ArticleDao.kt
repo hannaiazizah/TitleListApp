@@ -9,7 +9,7 @@ import com.hazizah.titlelist.domain.Article
 @Dao
 interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(roomTrendingRepo: List<Article>)
+    suspend fun insertAll(articleList: List<Article>)
 
     @Query("SELECT * FROM article")
     suspend fun getAll(): List<Article>
@@ -17,7 +17,7 @@ interface ArticleDao {
     @Query("DELETE FROM article")
     suspend fun deleteAll()
 
-    @Query("SELECT * FROM article WHERE title LIKE :search")
+    @Query("SELECT * FROM article WHERE title LIKE '%' || :search || '%'")
     suspend fun findTitle(search: String): List<Article>
 
 }
