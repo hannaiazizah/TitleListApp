@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/titleListFragment">
+
+    <fragment
+        android:id="@+id/titleListFragment"
+        android:label="Title List"
+        android:name="com.hazizah.titlelist.presentation.ListFragment"/>
+
+</navigation>
